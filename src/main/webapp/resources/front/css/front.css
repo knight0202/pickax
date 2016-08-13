@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+.front-back{
+	min-height: 528.8px;
+	background-size: cover;
+    background-position: center top;
+    position: relative;
+    z-index: 99;
+    padding-bottom: 2rem;
+    overflow:auto;
+    display:block;
+}
+.front-div{
+	min-height:700px;
+	display:block;
+	max-width:1100px;
+	margin-top:150px;
+}
+.front-slider{
+	color:white;
+	font-size:25px;
+	margin:5px;
+	cursor:pointer;
+}
+.front-slider-box{
+	text-align:center;
+}
