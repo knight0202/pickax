@@ -55,7 +55,9 @@
 <title><tiles:getAsString name="title"/></title>
 </head>
 <body data-spy="scroll">
-	<tiles:insertAttribute name="header"/>
+	<c:if test="${pageInfo == 'index'}">
+		<tiles:insertAttribute name="header"/>
+	</c:if>
 	<tiles:insertAttribute name="body"/>	
 </body>	
 	

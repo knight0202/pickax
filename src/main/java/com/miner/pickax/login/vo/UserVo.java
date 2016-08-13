@@ -1,21 +1,36 @@
 package com.miner.pickax.login.vo;
 
+import java.sql.Date;
+
 public class UserVo {
-	
+	private int userSec;
 	private String userID;
 	private String userPW;
+	private String userNick;
+	private String userNm;
 	private String userEmail;
-	private String phoneNumber;
-	private int terms;
-	private String confirm;
 	private String userType;
-	private String register_date;
-	private String expire_date;
-	private String userName;
-	private String userBirth;
-	private String userAddr;
+	private Date userRegisterDate;
 	
 	
+	public Date getUserRegisterDate() {
+		return userRegisterDate;
+	}
+	public void setUserRegisterDate(Date userRegisterDate) {
+		this.userRegisterDate = userRegisterDate;
+	}
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	public int getUserSec() {
+		return userSec;
+	}
+	public void setUserSec(int userSec) {
+		this.userSec = userSec;
+	}
 	public String getUserID() {
 		return userID;
 	}
@@ -28,69 +43,22 @@ public class UserVo {
 	public void setUserPW(String userPW) {
 		this.userPW = userPW;
 	}
+	public String getUserNick() {
+		return userNick;
+	}
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
 	public String getUserEmail() {
 		return userEmail;
 	}
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	public int getTerms() {
-		return terms;
-	}
-	public void setTerms(int terms) {
-		this.terms = terms;
-	}
-	
-	public String getConfirm() {
-		return confirm;
-	}
-	public void setConfirm(String confirm) {
-		this.confirm = confirm;
-	}
-	public String getUserType() {
-		return userType;
-	}
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-	public String getRegister_date() {
-		return register_date;
-	}
-	public void setRegister_date(String register_date) {
-		this.register_date = register_date;
-	}
-	public String getExpire_date() {
-		return expire_date;
-	}
-	public void setExpire_date(String expire_date) {
-		this.expire_date = expire_date;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getUserBirth() {
-		return userBirth;
-	}
-	public void setUserBirth(String userBirth) {
-		this.userBirth = userBirth;
-	}
-	public String getUserAddr() {
-		return userAddr;
-	}
-	public void setUserAddr(String userAddr) {
-		this.userAddr = userAddr;
-	}
-	
-	
-	
-	
 }

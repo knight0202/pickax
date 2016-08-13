@@ -42,10 +42,6 @@ public class LoginService implements UserDetailsService {
 		
 		role.add(new SimpleGrantedAuthority(auth));
 		
-		if(vo.getConfirm().compareTo("Y") == 0) {
-			role.add(new SimpleGrantedAuthority("USER_CONFIRM"));
-		}
-		
 		UserDetails user = new User(username,pwd,role);
 		return user;
 	}

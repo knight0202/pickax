@@ -39,13 +39,30 @@ public class LoginController {
 	
 	@Autowired private MemberMapper memberMapper;
 	
+	//메인 소개페이지 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		model.addAttribute("pageInfo","index");
 		
 		return new ModelAndView("login/index");
 	}
-	
+	//로그인 페이지
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		model.addAttribute("pageInfo","login");
+		
+		return new ModelAndView("login/login");
+	}
+	//회원가입 페이지
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signup(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		model.addAttribute("pageInfo","signup");
+		
+		return new ModelAndView("login/signup");
+	}
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String being(
@@ -115,16 +132,6 @@ public class LoginController {
 			HttpServletRequest request) throws Exception {
 		logger.debug("============= member_add =============");
 		logger.debug("userVo : {}", new JSONObject(userVo).toString());
-		
-		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	
-//		String userPw = userVo.getUserPW();
-		
-		userVo.setRegister_date(dateFormat.format(date));
-		
-		userVo.setUserBirth(dateFormat.format(date));
 		
 		userVo.setUserPW(CommonUtil.messageToCryp(userVo.getUserPW()));
 		

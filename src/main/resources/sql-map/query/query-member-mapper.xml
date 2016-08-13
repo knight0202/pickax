@@ -11,16 +11,29 @@
 			<if test="userPW !=null and userPW !=''">
 				and userPW = #{userPW}
 			</if>
-			<if test="userType !=null and userType !=''">
-				and userType = #{userType}
-			</if>
 		</where>
 	</select>
 	
 	<insert id="setUser" parameterType="com.miner.pickax.login.vo.UserVo">
-		INSERT INTO tb_member (userID, userPW, userEmail, phoneNumber, register_date,userName,userBirth,userAddr,userType)
-		VALUES (#{userID}, #{userPW}, #{userEmail}, #{phoneNumber}, #{register_date}, #{userName}, #{userBirth}, #{userAddr},#{userType})
-	
+		INSERT INTO tb_member (userID, userPW, userNm)
+		VALUES (#{userID}, #{userPW}, #{userNm})
 	</insert>
 	
+	<update id="updateUser" parameterType="com.miner.pickax.login.vo.UserVo">
+		UPDATE tb_member
+		SET
+		<if test="userNick != null and userNick != ''">
+			userNick = #{userNick}
+		</if>
+		<if test="userNm != null and userNm != ''">
+			userNm = #{userNm}
+		</if>
+		<if test="userEmail != null and userEmail != ''">
+			userEmail = #{userEmail}
+		</if>
+		<if test="userPW != null and userPW != ''">
+			userPW = #{userPW}
+		</if>
+		WHERE userSec = #{userSec}
+	</update>
 </mapper>

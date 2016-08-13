@@ -11,5 +11,6 @@ public interface MemberMapper {
 	
 	public UserVo getUser(UserVo userVo);
 	public void setUser(UserVo userVo);
+	public void updateUser(UserVo userVo);
 	
 }

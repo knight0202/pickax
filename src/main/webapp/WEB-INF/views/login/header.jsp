@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
 			        			<a id="logo-link" href="${pageContext.request.contextPath}" style="color:white;">P.KAX</a>
 			        		</div>
 			        		<div class="col-lg-9 col-md-9 col-sm-9 hidden-xs">
-			        			<a class="right-group">
+			        			<a href="${pageContext.request.contextPath}/login" class="right-group">
 				        			<i class="fa fa-sign-in"></i> 로그인
 				        		</a>
 				        		<a class="right-group">
