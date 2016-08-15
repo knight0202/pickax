@@ -16,9 +16,6 @@ import com.miner.pickax.login.vo.UserVo;
 
 
 public class LoginService implements UserDetailsService {
-	public static final String INDIVIDSUAL_PREFIX = "in_";
-	public static final String CORPORATE_PREFIX = "co_";
-	
 	@Autowired MemberMapper memberMapper;
 	
 	@Override
@@ -28,10 +25,7 @@ public class LoginService implements UserDetailsService {
 		
 		UserVo userVo = new UserVo();
 		
-		if(username.startsWith(INDIVIDSUAL_PREFIX)) {
-			username = username.substring(INDIVIDSUAL_PREFIX.length());
-			userVo.setUserID(username);
-		} 
+		userVo.setUserID(username);
 		
 		UserVo vo = memberMapper.getUser(userVo);
 		
@@ -45,6 +39,4 @@ public class LoginService implements UserDetailsService {
 		UserDetails user = new User(username,pwd,role);
 		return user;
 	}
-
-	
 }

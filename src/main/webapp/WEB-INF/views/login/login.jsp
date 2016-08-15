@@ -9,6 +9,7 @@
  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <style>
 		.sh-header{
 			border-radius:0px;
@@ -131,21 +132,26 @@
 					<div style="display: none" id="login-alert"
 						class="alert alert-danger col-sm-12"></div>
 
-					<form id="loginform" class="form-horizontal" role="form">
+					<form id="loginform" class="form-horizontal" role="form" method="post" action="j_spring_security_check">
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="email" class="form-control" name="username" value=""
+								type="email" class="form-control" name="j_username" value=""
 								placeholder="아이디">
 						</div>
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
-								type="password" class="form-control" name="password"
+								type="password" class="form-control" name="j_password"
 								placeholder="비밀번호">
 						</div>
+						<c:if test="${info_message != null}">
+							<div class="col-lg-12">
+								<p><i class="fa fa-ban"></i>&nbsp;<c:out value="${info_message}"/></p>
+							</div>
+						</c:if>
 						<div class="input-group">
 							<div class="checkbox">
 								<label> <input id="login-remember" type="checkbox"
@@ -159,7 +165,7 @@
 							<!-- Button -->
 
 							<div class="col-sm-12 controls">
-								<a id="btn-login" href="#" class="btn btn-success">로그인 </a> <a
+								<a id="btn-login" href="javascript:$('form').submit();" class="btn btn-success">로그인 </a> <a
 									id="btn-fblogin" href="#" class="btn btn-primary">페이스북 계정으로 로그인</a>
 
 							</div>

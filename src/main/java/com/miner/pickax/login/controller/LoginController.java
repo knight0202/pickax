@@ -96,8 +96,9 @@ public class LoginController {
 		
 		if(error != null) {
 			if(error.compareTo("fail") == 0) {
-				
 				redirectAttr.addFlashAttribute("info_message", "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
+				System.out.println("로그인 실패");
+				return "redirect:/login";
 			} else if(error.compareTo("access") == 0) {
 				redirectAttr.addFlashAttribute("info_message", "관리자 승인이 나면 사용이 가능합니다.");
 			} else if(error.compareTo("session") == 0) {
@@ -106,7 +107,6 @@ public class LoginController {
 		}
 		
 		return "redirect:/";
-//		return new ModelAndView("login/login-main");
 	}
 	
 	

@@ -12,7 +12,7 @@
 		<security:intercept-url pattern="/main/*" access="hasAnyRole('N','A')"/>
 		<security:intercept-url pattern="/login/*" access="permitAll"/>
 		
-		<security:form-login login-page="/" default-target-url="/index" authentication-failure-url="/error?error=fail" />
+		<security:form-login login-page="/login" default-target-url="/" authentication-failure-url="/error?error=fail" />
 		
 		<security:logout logout-url="/logout" delete-cookies="true" invalidate-session="true" success-handler-ref="customLogoutSucessHandler"/>
 		
@@ -22,8 +22,6 @@
 		</security:session-management>
 
 	</security:http>
-	
-
 	
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="loginService">
