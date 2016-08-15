@@ -59,12 +59,6 @@ pageEncoding="UTF-8"%>
 		<nav class="sh-header navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="header-div">
 				<div class="navbar-header">
-			        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-			            	<span class="sr-only">Toggle navigation</span>
-			            	<span class="icon-bar"></span>
-			            	<span class="icon-bar"></span>
-			            	<span class="icon-bar"></span>
-			        	</button>
 			        <div class="logo">
 			        	<div class="navbar-brand">
 			        		<div class="col-lg-3 col-md-3 col-sm-3 ">
@@ -77,6 +71,14 @@ pageEncoding="UTF-8"%>
 				        		<a class="right-group">
 				        			<i class="fa fa-reorder"></i>메뉴
 				        		</a>
+			        		</div>
+			        		<div class="hidden-lg hidden-md hidden-sm col-xs-3 col-xs-offset-6">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="margin:0px; margin-top:-7px; border:1px solid rgba(0,0,0,0); background-color:rgba(0,0,0,0.2);">
+					            	<span class="sr-only">Toggle navigation</span>
+					            	<span class="icon-bar" style="background-color:white;"></span>
+					            	<span class="icon-bar" style="background-color:white;"></span>
+					            	<span class="icon-bar" style="background-color:white;"></span>
+					        	</button>			        		
 			        		</div>
 			        	</div>
 			        </div>

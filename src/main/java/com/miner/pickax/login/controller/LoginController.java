@@ -41,11 +41,16 @@ public class LoginController {
 	
 	//메인 소개페이지 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model) {
+	public ModelAndView home(Locale locale, Model model,
+			Principal principal) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		model.addAttribute("pageInfo","index");
 		
-		return new ModelAndView("login/index");
+		if(principal != null){
+			return new ModelAndView("main/index");
+		}else{
+			return new ModelAndView("login/index");
+		}
 	}
 	//로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

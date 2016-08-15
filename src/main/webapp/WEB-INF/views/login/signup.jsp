@@ -1,3 +1,4 @@
+
 <!-- 
 	팀명		:	광부들(Miner)
 	작성자	:	유상현
@@ -115,68 +116,56 @@
 		</nav>	
 	</div>
     
-	<div id="loginbox" style="margin-top: 10px;"
-			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			<div class="panel panel-info">
-				<div class="panel-heading" style="background-image: none; background: none; border-bottom:1px solid white; color:white;">
-					<div class="panel-title">로그인</div>
-					<div
-						style="float: right; font-size: 80%; position: relative; top: -10px">
-						<a href="#">비밀번호를 잊어버렸습니까?</a>
-					</div>
-				</div>
-
-				<div style="padding-top: 30px" class="panel-body">
-
-					<div style="display: none" id="login-alert"
-						class="alert alert-danger col-sm-12"></div>
-
-					<form id="loginform" class="form-horizontal" role="form">
-
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="email" class="form-control" name="username" value=""
-								placeholder="아이디">
-						</div>
-
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
-								type="password" class="form-control" name="password"
-								placeholder="비밀번호">
-						</div>
-						<div class="input-group">
-							<div class="checkbox">
-								<label> <input id="login-remember" type="checkbox"
-									name="remember" value="1"> 비밀번호 저장
-								</label>
-							</div>
-						</div>
-
-
-						<div style="margin-top: 10px" class="form-group">
-							<!-- Button -->
-
-							<div class="col-sm-12 controls">
-								<a id="btn-login" href="#" class="btn btn-success">로그인 </a> <a
-									id="btn-fblogin" href="#" class="btn btn-primary">페이스북 계정으로 로그인</a>
-
-							</div>
-						</div>
-
-
-						<div class="form-group">
-							<div class="col-md-12 control">
-								<div
-									style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-									아직 아이디가 없습니까? <a href="#"
-										onClick="location.href='${pageContext.request.contextPath}/signup'">
-										회원가입하기 </a>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+	<div id="signupbox" style="margin-top:10px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="background-image: none; background: none; border-bottom:1px solid white; color:white;">
+                            <div class="panel-title">회원가입</div>
+                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onClick="location.href='${pageContext.request.contextPath}/login'">로그인</a></div>
+                        </div>  
+                        <div class="panel-body" >
+                            <form id="signupform" class="form-horizontal" role="form" method="post" action="${cp}/member/sign-up/submit">
+                                
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+                                    
+                                
+                                  
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="firstname" class="col-md-3 control-label">이름</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="name" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">비밀번호</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                   
+                                <div class="form-group">
+                                    <!-- Button -->                                        
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp;가입하기</button> 
+                                    </div>
+                                </div>
+                                
+                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+                                    
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  페이스북 계정으로 가입</button>
+                                    </div>                                           
+                                </div>
+                            </form>
+                         </div>
+                    </div>
+         </div> 
