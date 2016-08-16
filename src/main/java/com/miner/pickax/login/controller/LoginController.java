@@ -130,19 +130,43 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/member_add", method = RequestMethod.POST)
-	@ResponseBody
 	public String memberAdd(Locale locale,
 			Model model,
 			@ModelAttribute("") UserVo userVo,
+			RedirectAttributes redirectAttr,
 			HttpServletRequest request) throws Exception {
 		logger.debug("============= member_add =============");
 		logger.debug("userVo : {}", new JSONObject(userVo).toString());
 		
-		userVo.setUserPW(CommonUtil.messageToCryp(userVo.getUserPW()));
+		//입력된 아이디인지 검사
+		if(userVo.getUserID() == ""){
+			redirectAttr.addFlashAttribute("info_type", "1");
+			redirectAttr.addFlashAttribute("info_message", "이메일 주소가 입력되지 않았습니다.");
+			return "redirect:/signup";
+		}else if(userVo.getUserNm() == ""){
+			redirectAttr.addFlashAttribute("info_type", "2");
+			redirectAttr.addFlashAttribute("info_message", "이름이 입력되지 않았습니다.");
+			return "redirect:/signup";
+		}else if(userVo.getUserPW() == ""){
+			redirectAttr.addFlashAttribute("info_type", "3");
+			redirectAttr.addFlashAttribute("info_message", "비밀번호가 입력되지 않았습니다.");
+			return "redirect:/signup";
+		}
 		
-		memberMapper.setUser(userVo);
+		//아이디 중복 검사
+		UserVo searchVo = new UserVo();
+		searchVo.setUserID(userVo.getUserID());
+		searchVo = memberMapper.getUser(searchVo);
 		
-		return "sucess";
+		if(searchVo != null){
+			redirectAttr.addFlashAttribute("info_message", "중복된 이메일 주소입니다.");
+			return "redirect:/signup";
+		}else{
+			userVo.setUserEmail(userVo.getUserID());
+			userVo.setUserPW(CommonUtil.messageToCryp(userVo.getUserPW()));
+			memberMapper.setUser(userVo);
+			return "redirect:/login";
+		}
 	}
 	
 	@RequestMapping(value = "/term_txt", method = RequestMethod.GET)

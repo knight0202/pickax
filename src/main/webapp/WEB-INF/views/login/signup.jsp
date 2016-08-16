@@ -10,6 +10,7 @@
  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <style>
 		.sh-header{
 			border-radius:0px;
@@ -123,7 +124,7 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onClick="location.href='${pageContext.request.contextPath}/login'">로그인</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/signup">
+                            <form id="signupform" class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/member_add">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -133,29 +134,33 @@
                                 
                                   
                                 <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
+                                    <label for="email" class="col-md-3 control-label">이름</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="userName" placeholder="Name">
-                                    </div>
+                                        <input type="text" class="form-control" name="userNm" placeholder="이름">
+                                    </div>	
                                 </div>
                                     
                                 <div class="form-group">
-                                    <label for="firstname" class="col-md-3 control-label">이름</label>
+                                    <label for="firstname" class="col-md-3 control-label">이메일(사용자ID)</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="userID" placeholder="Email Address">
+                                        <input type="text" class="form-control" name="userID" placeholder="이메일(아이디로 사용)">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">비밀번호</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="userPW" placeholder="Password">
+                                        <input type="password" class="form-control" name="userPW" placeholder="비밀번호">
                                     </div>
                                 </div>
-                                   
+                                <c:if test="${info_message != null}">
+									<div class="col-lg-12">
+										<p><i class="fa fa-ban"></i>&nbsp;<c:out value="${info_message}"/></p>
+									</div>
+								</c:if>
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp;가입하기</button> 
+                                        <button id="btn-signup" type="button" onclick="$('form').submit();" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp;가입하기</button> 
                                     </div>
                                 </div>
                                 

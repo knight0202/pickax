@@ -15,8 +15,8 @@
 	</select>
 	
 	<insert id="setUser" parameterType="com.miner.pickax.login.vo.UserVo">
-		INSERT INTO tb_member (userID, userPW, userNm)
-		VALUES (#{userID}, #{userPW}, #{userNm})
+		INSERT INTO tb_member (userID, userPW, userNm, userEmail,userRegisterDate)
+		VALUES (#{userID}, #{userPW}, #{userNm}, #{userEmail}, now())
 	</insert>
 	
 	<update id="updateUser" parameterType="com.miner.pickax.login.vo.UserVo">
