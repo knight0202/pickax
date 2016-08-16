@@ -123,7 +123,7 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onClick="location.href='${pageContext.request.contextPath}/login'">로그인</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form" method="post" action="${cp}/member/sign-up/submit">
+                            <form id="signupform" class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/signup">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
@@ -135,20 +135,20 @@
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                        <input type="text" class="form-control" name="userName" placeholder="Name">
                                     </div>
                                 </div>
                                     
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">이름</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="name" placeholder="Name">
+                                        <input type="text" class="form-control" name="userID" placeholder="Email Address">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">비밀번호</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                        <input type="password" class="form-control" name="userPW" placeholder="Password">
                                     </div>
                                 </div>
                                    
