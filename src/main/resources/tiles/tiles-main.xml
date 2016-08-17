@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base.main" template="/WEB-INF/views/base/main.jsp">
+		<put-attribute name="title" value="Pickax"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="left-side" value="/WEB-INF/views/main/left-side.jsp"></put-attribute>
+		<put-attribute name="right-side" value="/WEB-INF/views/main/right-side.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="main/*" extends="base.main">
+		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp"></put-attribute>
+	</definition>	
+</tiles-definitions>

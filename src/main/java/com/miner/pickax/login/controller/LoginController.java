@@ -54,33 +54,30 @@ public class LoginController {
 	}
 	//로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(Locale locale, Model model) {
+	public ModelAndView login(Locale locale, Model model, Principal principal) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		if(principal != null){
+			return new ModelAndView("main/index");
+		}
 		model.addAttribute("pageInfo","login");
 		
 		return new ModelAndView("login/login");
 	}
 	//회원가입 페이지
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public ModelAndView signup(Locale locale, Model model) {
+	public ModelAndView signup(Locale locale, Model model, Principal principal) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		model.addAttribute("pageInfo","signup");
+		
+		if(principal != null){
+			return new ModelAndView("main/index");
+		}
 		
 		return new ModelAndView("login/signup");
 	}
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String being(
-			Principal principal,
-			Locale locale,
-			Model model,
-			HttpServletRequest request) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		logger.debug("userID : {}", principal.getName());
-		request.getSession().setAttribute("name", principal.getName());
-		return "redirect:/dashboard/index";
-	}
+	
 	
 	@RequestMapping(value = "/error", method = RequestMethod.GET)
 	public String error(
