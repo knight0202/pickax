@@ -10,50 +10,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 	<style>
-		.sh-header{
-			height:150px;
-			background:none;
-			border:none;
-			box-shadow:none;
-			background: -webkit-linear-gradient(rgba(5,5,10,0.5), rgba(256,256,256,0)); /* For Safari 5.1 to 6.0 */
-    		background: -o-linear-gradient(rgba(5,5,10,0.5), rgba(256,256,256,0)); /* For Opera 11.1 to 12.0 */
-    		background: -moz-linear-gradient(rgba(5,5,10,0.5), rgba(256,256,256,0)); /* For Firefox 3.6 to 15 */
-		    background: linear-gradient(rgba(5,5,10,0.5), rgba(256,256,256,0)); /* Standard syntax (must be last) */
-		}
-		.header-div{
-			max-width:1200px;
-			margin:auto;
-		}
-		section{
-			padding-top:0px;
-			padding-bottom: 0px;
-		}
-		.navbar-brand{
-			position:absolute;
-			top:0;
-			bottom:0;
-			margin-top:auto;
-			margin-bottom:auto;
-			width:100%;
-			max-width:1200px;
-		}
-		.right-group{
-			float:right;
-			color:white;
-			margin-left:15px;
-			padding:5px;
-			background-color: rgba(0,0,0,0.2);
-    		border-radius: 5px;
-    		cursor:pointer;
-		}
-		.right-group:hover{
-			color:white;
-			background-color: rgba(0,0,0,0.5);
-		}
-		#logo-link{
-			font-weight:900;
-			font-size:40px;
-		}
+		
 	</style>
 	<div class="container">
 		<nav class="sh-header navbar navbar-default navbar-fixed-top" role="navigation">

@@ -1,9 +1,9 @@
 <!-- 
 	팀명		:	광부들(Miner)
 	작성자	:	유상현
-	날짜		:	2016.08.08
-	페이지명	:	로그인,front 화면 백그라운드
-	상세		:	로그인,front화면의 백그라운드로 페이지에서 포함하는 CDN 및 import
+	날짜		:	2016.08.17
+	페이지명	:	메인화면 화면 백그라운드
+	상세		:	메인화면에서 사용하는 JS, CSS 등 Import
 	타입		:	tiles : template (호출명)
  -->
  
@@ -40,15 +40,26 @@
 <!-- GOOGLE FONT -->
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
+<style>
+	#rotatingGlobe{
+		width: 100%;
+		height:100%;
+	}
+</style>
+
 <title><tiles:getAsString name="title"/></title>
 </head>
 <body>
-	<div class="container">
+	<div class="col-lg-12">
 		<tiles:insertAttribute name="header"/>
 		<tiles:insertAttribute name="left-side"/>
-		<tiles:insertAttribute name="body"/>	
+		<div class="">
+			<tiles:insertAttribute name="body"/>
+		</div>
 		<tiles:insertAttribute name="right-side"/>
-		<tiles:insertAttribute name="footer"/>
+		<div class="col-lg-12">
+			<tiles:insertAttribute name="footer"/>
+		</div>
 	</div>
 </body>	
 	<!-- JS import 영역 -->
@@ -60,8 +71,8 @@
 		(function() {
 			  var globe = planetaryjs.planet();
 			  // Load our custom `autorotate` plugin; see below.
-			  globe.loadPlugin(autocenter({extraHeight: -50}));
-			  globe.loadPlugin(autoscale({extraHeight: -50}));
+			  globe.loadPlugin(autocenter({extraHeight: 0}));
+			  globe.loadPlugin(autoscale({extraHeight: 0}));
 			  globe.loadPlugin(autorotate(2));
 			  // The `earth` plugin draws the oceans and the land; it's actually
 			  // a combination of several separate built-in plugins.
