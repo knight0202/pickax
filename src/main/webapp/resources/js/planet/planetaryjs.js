@@ -197,7 +197,36 @@
       });
     };
   };
+  //나라 반응 테스트
+  planetaryjs.plugins.countries = function(config) {
+	  return function(planet) {
+		  var countries = null;
+		  
+		  planet.onInit(function() {
+		        var world = planet.plugins.topojson.world;
+		        land = topojson.feature(world, world.objects.countries);
+		      });
+		  planet.onDraw(function() {
+		        planet.withSavedContext(function(context) {
+		          context.beginPath();
+		          planet.path.context(context)(countries);
 
+		          if (config.fill !== false) {
+		            context.fillStyle = config.fill || 'white';
+		            context.fill();
+		          }
+
+		          if (config.stroke) {
+		            if (config.lineWidth) context.lineWidth = config.lineWidth;
+		            context.strokeStyle = config.stroke;
+		            context.stroke();
+		          }
+		        });
+		      });
+	  }
+  }
+  //나라 반응 테스트 끝
+  
   planetaryjs.plugins.land = function(config) {
     return function(planet) {
       var land = null;

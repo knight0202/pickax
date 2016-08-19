@@ -63,7 +63,7 @@
 			margin-top: -9px;
 		}
 		body{
-			background-image: url('${pageContext.request.contextPath}/resources/front/img/background/login_wallpaper.jpg');
+			background-image: url('${pageContext.request.contextPath}/resources/img/background/main-background.jpg');
 			min-height: 528.8px;
 			background-size: cover;
 		    background-position: center top;

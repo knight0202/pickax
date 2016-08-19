@@ -41,25 +41,36 @@
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
 <style>
+	body{
+		background:url("${pageContext.request.contextPath}/resources/img/background/main-background.jpg");
+	}
 	#rotatingGlobe{
 		width: 100%;
-		height:100%;
+		height:80%;
+	}
+	#content{
+		padding:0px;
+	}
+	#main{
+		padding:0px;
 	}
 </style>
 
 <title><tiles:getAsString name="title"/></title>
 </head>
 <body>
-	<div class="col-lg-12">
+	<div id="content" class="col-lg-12">
 		<tiles:insertAttribute name="header"/>
 		<tiles:insertAttribute name="left-side"/>
-		<div class="">
+		<div id="main" class="col-lg-12">
 			<tiles:insertAttribute name="body"/>
 		</div>
 		<tiles:insertAttribute name="right-side"/>
-		<div class="col-lg-12">
-			<tiles:insertAttribute name="footer"/>
-		</div>
+		<footer class="footer">
+	      <div class="container">
+	        <tiles:insertAttribute name="footer"/>
+	      </div>
+	    </footer>
 	</div>
 </body>	
 	<!-- JS import 영역 -->
@@ -71,26 +82,24 @@
 		(function() {
 			  var globe = planetaryjs.planet();
 			  // Load our custom `autorotate` plugin; see below.
-			  globe.loadPlugin(autocenter({extraHeight: 0}));
-			  globe.loadPlugin(autoscale({extraHeight: 0}));
+			  globe.loadPlugin(autocenter({extraHeight: 50}));
+			  globe.loadPlugin(autocenter({extraWidth: 100}));
+			  globe.loadPlugin(autoscale({extraHeight: 50}));
+			  globe.loadPlugin(autoscale({extraWidth: 100}));
 			  globe.loadPlugin(autorotate(2));
-			  // The `earth` plugin draws the oceans and the land; it's actually
-			  // a combination of several separate built-in plugins.
-			  //
-			  // Note that we're loading a special TopoJSON file
-			  // (world-110m-withlakes.json) so we can render lakes.
+			  
 			  globe.loadPlugin(planetaryjs.plugins.earth({
 			    topojson: { file:   '${pageContext.request.contextPath}/resources/js/planet/world-110m.json' },
-			    oceans:   { fill:   '#eee' },
-			    land:     { fill:   '#ccc' },
-			    borders:  { stroke: '#bbb' }
+			    oceans:   { fill:   'rgba(200,200,200,0.2)' },
+			    land:     { fill:   'rgba(10,10,10,0.4)' },
+			    borders:  { stroke: 'rgba(250,250,250,0.2)' }
 			  }));
 			  globe.loadPlugin(lakes({
-			    fill: '#eee'
+			    fill: 'rgba(250,250,250,0.1)'
 			  }));
 			  globe.loadPlugin(planetaryjs.plugins.pings());
 			  globe.loadPlugin(planetaryjs.plugins.zoom({
-				  scaleExtent: [50, 5000]
+				  scaleExtent: [200, 5000]
 			  }));
 			  globe.loadPlugin(planetaryjs.plugins.drag({
 			    // Dragging the globe should pause the
@@ -104,12 +113,12 @@
 			  }));
 			  globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
 	
-			  var colors = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];
+			  var colors = ['rgba(250,250,250,0.2)'];
 			  setInterval(function() {
 			    var lat = Math.random() * 170 - 85;
 			    var lng = Math.random() * 360 - 180;
 			    var color = colors[Math.floor(Math.random() * colors.length)];
-			    globe.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: Math.random() * 10 });
+			    //globe.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: Math.random() * 10 });
 			  }, 150);
 	
 			  var canvas = document.getElementById('rotatingGlobe');
@@ -118,7 +127,7 @@
 			
 			  function autocenter(options) {
 				    options = options || {};
-				    var needsCentering = false;
+				    var needsCentering = true;
 				    var globe = null;
 	
 				    var resize = function() {

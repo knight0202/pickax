@@ -1,45 +1,56 @@
 <!-- 
 	팀명		:	광부들(Miner)
 	작성자	:	유상현
-	날짜		:	2016.08.09
-	페이지명	:	login-header 화면
-	상세		:	front 화면 및 login 화면 상단 
+	날짜		:	2016.08.18
+	페이지명	:	header 화면
+	상세		:	메인 화면 
 	타입		:	tiles : header (호출명)
 	수정		:	css 상단 bar 고정 및 디자인 변경
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 	<style>
-		
+		.container-fluid{
+			background-color:rgba(200,200,200,0.3);
+			border-bottom: white;
+		}
+		.navbar-fixed-top{
+			background:none;
+		}
 	</style>
 	<div class="container">
-		<nav class="sh-header navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="header-div">
-				<div class="navbar-header">
-			        <div class="logo">
-			        	<div class="navbar-brand">
-			        		<div class="col-lg-3 col-md-3 col-sm-3 ">
-			        			<a id="logo-link" href="${pageContext.request.contextPath}" style="color:white;">P.KAX</a>
-			        		</div>
-			        		<div class="col-lg-9 col-md-9 col-sm-9 hidden-xs">
-			        			<a href="${pageContext.request.contextPath}/login" class="right-group">
-				        			<i class="fa fa-sign-in"></i> 로그인
-				        		</a>
-				        		<a class="right-group">
-				        			<i class="fa fa-reorder"></i>메뉴
-				        		</a>
-			        		</div>
-			        		<div class="hidden-lg hidden-md hidden-sm col-xs-3 col-xs-offset-6">
-								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="margin:0px; margin-top:-7px; border:1px solid rgba(0,0,0,0); background-color:rgba(0,0,0,0.2);">
-					            	<span class="sr-only">Toggle navigation</span>
-					            	<span class="icon-bar" style="background-color:white;"></span>
-					            	<span class="icon-bar" style="background-color:white;"></span>
-					            	<span class="icon-bar" style="background-color:white;"></span>
-					        	</button>			        		
-			        		</div>
-			        	</div>
-			        </div>
-				</div>
-			</div>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+	          <div class="navbar-header">
+	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	              <span class="sr-only">Toggle navigation</span>
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" href="#" style="color:white;">P.KAX</a>
+	          </div>
+	          <div id="navbar" class="navbar-collapse collapse">
+	            <ul class="nav navbar-nav">
+	              <li><a href="#" style="color:white;">About</a></li>
+	              <li><a href="#" style="color:white;">Contact</a></li>
+	              <li class="dropdown">
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">Dropdown <span class="caret"></span></a>
+	                <ul class="dropdown-menu">
+	                  <li><a href="#">Action</a></li>
+	                  <li><a href="#">Another action</a></li>
+	                  <li><a href="#">Something else here</a></li>
+	                  <li role="separator" class="divider"></li>
+	                  <li class="dropdown-header">Nav header</li>
+	                  <li><a href="#">Separated link</a></li>
+	                  <li><a href="#">One more separated link</a></li>
+	                </ul>
+	              </li>
+	            </ul>
+	            <ul class="nav navbar-nav navbar-right">
+	              <li><a href="../navbar-fixed-top/" style="font-size:20px; color:white;"><i class="fa fa-cog"></i> </a></li>
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div>
 		</nav>	
 	</div>
