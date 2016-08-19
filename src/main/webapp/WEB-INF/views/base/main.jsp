@@ -41,6 +41,9 @@
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
 <style>
+	.no-padding{
+		padding:0;
+	}
 	body{
 		background:url("${pageContext.request.contextPath}/resources/img/background/main-background.jpg");
 	}
@@ -54,24 +57,44 @@
 	#main{
 		padding:0px;
 	}
+	#right_nav_div{
+		position:absolute;
+		width: 300px;
+		top: 0;
+		right: -300px;
+		height: 100%;
+		overflow: scroll;
+		display: block;
+		background-color: rgba(250,250,250,0.7);
+	}
+	#left_block{
+		position:absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(10,10,10,0.6);
+	}
 </style>
 
 <title><tiles:getAsString name="title"/></title>
 </head>
 <body>
-	<div id="content" class="col-lg-12">
-		<tiles:insertAttribute name="header"/>
-		<tiles:insertAttribute name="left-side"/>
-		<div id="main" class="col-lg-12">
-			<tiles:insertAttribute name="body"/>
+		<div id="content" class="col-lg-12">
+			<tiles:insertAttribute name="header"/>
+			<tiles:insertAttribute name="left-side"/>
+			<div id="main" class="col-lg-12">
+				<tiles:insertAttribute name="body"/>
+			</div>
 		</div>
-		<tiles:insertAttribute name="right-side"/>
+		<div id="right_nav_div">
+			<tiles:insertAttribute name="right-side"/>		
+		</div>
 		<footer class="footer">
 	      <div class="container">
 	        <tiles:insertAttribute name="footer"/>
 	      </div>
 	    </footer>
-	</div>
+	    <div id="left_block" style="display: none;" onclick="right_side()"></div>
 </body>	
 	<!-- JS import 영역 -->
 	
@@ -82,10 +105,10 @@
 		(function() {
 			  var globe = planetaryjs.planet();
 			  // Load our custom `autorotate` plugin; see below.
-			  globe.loadPlugin(autocenter({extraHeight: 50}));
-			  globe.loadPlugin(autocenter({extraWidth: 100}));
-			  globe.loadPlugin(autoscale({extraHeight: 50}));
-			  globe.loadPlugin(autoscale({extraWidth: 100}));
+			  globe.loadPlugin(autocenter({extraHeight: 0}));
+			  globe.loadPlugin(autocenter({extraWidth: 0}));
+			  globe.loadPlugin(autoscale({extraHeight: 0}));
+			  globe.loadPlugin(autoscale({extraWidth: 0}));
 			  globe.loadPlugin(autorotate(2));
 			  
 			  globe.loadPlugin(planetaryjs.plugins.earth({
@@ -235,6 +258,52 @@
 	<!-- JQUERY import -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+		<!-- header control JS -->
+		<script>
+			var right_nav = 0	
+		
+			function right_side(){
+				if(right_nav == 0){
+					//$(".navbar-fixed-top").css("left","-200px");
+					$("#left_block").css("display","");
+					$("#left_block").animate({
+						right: "+=300"
+					},300,function(){
+					});
+					
+					$("#right_nav_div").animate({
+					    right: "+=300"
+					  }, 300, function() {
+					  });
+					$(".navbar-fixed-top").animate({
+					    opacity: 0.7,
+					    left: "-=300",
+					    right: "+=300"
+					  }, 300, function() {
+					  });
+					right_nav += 1;
+				}else{
+					//$(".navbar-fixed-top").css("left","0");
+					$("#left_block").css("display","none");
+					$("#left_block").animate({
+						right: "-=300"
+					},300,function(){
+					});
+					
+					$("#right_nav_div").animate({
+					    right: "-=300"
+					  }, 300, function() {
+					  });
+					$(".navbar-fixed-top").animate({
+					    opacity: 1,
+					    left: "+=300",
+					    right: "-=300"
+					  }, 300, function() {
+					  });
+					right_nav -= 1;
+				}
+			}
+		</script>
 		<script>
 			if (!window.jQuery) {
 				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
