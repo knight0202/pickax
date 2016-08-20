@@ -31,7 +31,7 @@ pageEncoding="UTF-8"%>
 	<div id="right_nav_header" onclick="right_side()">
 		<p>설 정 &nbsp;<span class="glyphicon glyphicon-chevron-right"></span></p>
 	</div>
-	<div id="right_nav_body" class="col-lg-12 no-padding">
+	<div id="right_nav_body" class="col-lg-12 no-padding smart-form">
 		<ul class="no-padding">
 			<li>
 				<div class="col-lg-12 nav-li">

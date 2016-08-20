@@ -38,7 +38,7 @@ pageEncoding="UTF-8"%>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
 	            	<li class="dropdown">
-	                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;"><c:out value="${name}"/> 님 <span class="caret"></span></a>
+	                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">사용자 님 <span class="caret"></span></a>
 	                		<ul class="dropdown-menu">
 			                  <li><a href="#">Action</a></li>
 			                  <li><a href="#">Another action</a></li>
@@ -49,7 +49,7 @@ pageEncoding="UTF-8"%>
 			                  <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 			                </ul>
 	              	</li>
-	              <li><a href="javascript:right_side();" style="font-size:20px; text-align:right; color:white;"><i class="fa fa-cog"></i> </a></li>
+	              <li><a href="javascript:right_side();" style="font-size:20px; text-align:right; color:white;"><i class="fa fa-gear" id="header_edit"></i> </a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
 	        </div>
