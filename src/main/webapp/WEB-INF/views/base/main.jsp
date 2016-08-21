@@ -29,6 +29,9 @@
 
 <!-- CSS import 영역 -->
 
+<!-- smart admin ELEMENT CC -->
+<link href="${pageContext.request.contextPath}/resources/css/smartadmin-production.min.css" rel="stylesheet" media="screen">
+
 <!-- BOOTSTRAP CSS import -->
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
@@ -54,12 +57,12 @@
 	#content{
 		padding:0px;
 	}
-	#main{
+	#main_div{
 		padding:0px;
 	}
 	#right_nav_div{
 		position:absolute;
-		width: 300px;
+		width: 0;
 		top: 0;
 		right: -300px;
 		height: 100%;
@@ -73,6 +76,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: rgba(10,10,10,0.6);
+		cursor:pointer;
 	}
 </style>
 
@@ -82,7 +86,7 @@
 		<div id="content" class="col-lg-12">
 			<tiles:insertAttribute name="header"/>
 			<tiles:insertAttribute name="left-side"/>
-			<div id="main" class="col-lg-12">
+			<div id="main_div" class="col-lg-12">
 				<tiles:insertAttribute name="body"/>
 			</div>
 		</div>
@@ -264,41 +268,43 @@
 		
 			function right_side(){
 				if(right_nav == 0){
-					//$(".navbar-fixed-top").css("left","-200px");
 					$("#left_block").css("display","");
+					$("#right_nav_div").css("width","300");
 					$("#left_block").animate({
 						right: "+=300"
-					},300,function(){
+					},400,function(){
 					});
 					
 					$("#right_nav_div").animate({
 					    right: "+=300"
-					  }, 300, function() {
+					  }, 400, function() {
 					  });
 					$(".navbar-fixed-top").animate({
 					    opacity: 0.7,
 					    left: "-=300",
 					    right: "+=300"
-					  }, 300, function() {
+					  }, 400, function() {
+						  $("#header_edit").attr("class","fa fa-gear fa-spin");
 					  });
 					right_nav += 1;
 				}else{
-					//$(".navbar-fixed-top").css("left","0");
 					$("#left_block").css("display","none");
 					$("#left_block").animate({
 						right: "-=300"
-					},300,function(){
+					},400,function(){
 					});
 					
 					$("#right_nav_div").animate({
 					    right: "-=300"
-					  }, 300, function() {
+					  }, 400, function() {
 					  });
 					$(".navbar-fixed-top").animate({
 					    opacity: 1,
 					    left: "+=300",
 					    right: "-=300"
-					  }, 300, function() {
+					  }, 400, function() {
+						  $("#header_edit").attr("class","fa fa-gear");
+						  $("#right_nav_div").css("width","");
 					  });
 					right_nav -= 1;
 				}
