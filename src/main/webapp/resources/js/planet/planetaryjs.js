@@ -201,23 +201,27 @@
   planetaryjs.plugins.countries = function(config) {
 	  return function(planet) {
 		  var countries = null;
+		  //선택된 국가(config로 선택된 국가 아이디 받아서 입력)
+		  var selectedCountry = null;
 		  
-		  planet.onInit(function() {
-		        var world = planet.plugins.topojson.world;
-		        land = topojson.feature(world, world.objects.countries);
-		      });
+		  if(config.country !== false){
+			  planet.onInit(function() {
+				  	selectedCountry = config.country;
+			        var world = planet.plugins.topojson.world;
+			        countries = topojson.feature(world, world.objects.countries.geometries[selectedCountry]);
+			      });
+		  }
+		  
 		  planet.onDraw(function() {
 		        planet.withSavedContext(function(context) {
 		          context.beginPath();
 		          planet.path.context(context)(countries);
-
 		          if (config.fill !== false) {
-		            context.fillStyle = config.fill || 'white';
+		            context.fillStyle = 'red';
 		            context.fill();
 		          }
-
 		          if (config.stroke) {
-		            if (config.lineWidth) context.lineWidth = config.lineWidth;
+		              if (config.lineWidth) context.lineWidth = config.lineWidth;
 		            context.strokeStyle = config.stroke;
 		            context.stroke();
 		          }
@@ -296,12 +300,14 @@
     var oceanOptions = config.oceans || {};
     var landOptions = config.land || {};
     var bordersOptions = config.borders || {};
+    var userOption = config.countries || {};
 
     return function(planet) {
       planetaryjs.plugins.topojson(topojsonOptions)(planet);
       planetaryjs.plugins.oceans(oceanOptions)(planet);
       planetaryjs.plugins.land(landOptions)(planet);
       planetaryjs.plugins.borders(bordersOptions)(planet);
+      planetaryjs.plugins.countries(userOption)(planet);
     };
   };
 

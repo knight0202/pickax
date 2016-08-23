@@ -119,6 +119,7 @@
 			    topojson: { file:   '${pageContext.request.contextPath}/resources/js/planet/world-110m.json' },
 			    oceans:   { fill:   'rgba(200,200,200,0.2)' },
 			    land:     { fill:   'rgba(10,10,10,0.4)' },
+			    countries:     { country:   1 },
 			    borders:  { stroke: 'rgba(250,250,250,0.2)' }
 			  }));
 			  globe.loadPlugin(lakes({
