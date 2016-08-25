@@ -11,7 +11,49 @@
 		padding:0px;
 	}
 </style>
-<div class="col-lg-12 globe-div">
-	<canvas id="rotatingGlobe">
-	</canvas>
+<style type="text/css">
+
+.water {
+  fill: rgba(200,200,200,0.2);
+}
+
+.land {
+  fill: rgba(10,10,10,0.4);
+  stroke: rgba(250,250,250,0.2);
+  stroke-width: 0.7px;
+}
+
+.land:hover {
+  fill:rgba(250,250,250,0.5);
+  stroke-width: 1.5px;
+}
+
+.focused {
+  fill: rgba(250,250,250,0.2);
+}
+select {
+  position: absolute;
+  top: 100px;
+  left: 980px;
+  border: solid #ccc 1px;
+  padding: 3px;
+  box-shadow: inset 1px 1px 2px #ddd8dc;
+}
+
+.countryTooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 5px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+</style>
+<div class="col-lg-12 globe-div" align="center">
+
 </div>

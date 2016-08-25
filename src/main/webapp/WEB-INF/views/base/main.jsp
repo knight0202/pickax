@@ -26,6 +26,7 @@
 
 <script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
 <script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
 
 <!-- CSS import 영역 -->
 
@@ -102,86 +103,172 @@
 </body>	
 	<!-- JS import 영역 -->
 	
-	<!-- planet 표현하기 위한 JS파일 import -->
-	<script src="${pageContext.request.contextPath}/resources/js/planet/planetaryjs.js"></script>
-	<c:if test="${pageInfo == 'index'}">
+	<!-- JQUERY import -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		
 		<script>
-		(function() {
-			  var globe = planetaryjs.planet();
-			  // Load our custom `autorotate` plugin; see below.
-			  globe.loadPlugin(autocenter({extraHeight: 0}));
-			  globe.loadPlugin(autocenter({extraWidth: 0}));
-			  globe.loadPlugin(autoscale({extraHeight: 0}));
-			  globe.loadPlugin(autoscale({extraWidth: 0}));
-			  globe.loadPlugin(autorotate(2));
-			  
-			  globe.loadPlugin(planetaryjs.plugins.earth({
-			    topojson: { file:   '${pageContext.request.contextPath}/resources/js/planet/world-110m.json' },
-			    oceans:   { fill:   'rgba(200,200,200,0.2)' },
-			    land:     { fill:   'rgba(10,10,10,0.4)' },
-			    countries:     { country:   1 },
-			    borders:  { stroke: 'rgba(250,250,250,0.2)' }
-			  }));
-			  globe.loadPlugin(lakes({
-			    fill: 'rgba(250,250,250,0.1)'
-			  }));
-			  globe.loadPlugin(planetaryjs.plugins.pings());
-			  globe.loadPlugin(planetaryjs.plugins.zoom({
-				  scaleExtent: [200, 5000]
-			  }));
-			  globe.loadPlugin(planetaryjs.plugins.drag({
-			    // Dragging the globe should pause the
-			    // automatic rotation until we release the mouse.
-			    onDragStart: function() {
-			      this.plugins.autorotate.pause();
-			    },
-			    onDragEnd: function() {
-			      this.plugins.autorotate.resume();
-			    }
-			  }));
-			  globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
-	
-			  var colors = ['rgba(250,250,250,0.2)'];
-			  setInterval(function() {
-			    var lat = Math.random() * 170 - 85;
-			    var lng = Math.random() * 360 - 180;
-			    var color = colors[Math.floor(Math.random() * colors.length)];
-			    //globe.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: Math.random() * 10 });
-			  }, 150);
-	
-			  var canvas = document.getElementById('rotatingGlobe');
-			  // Draw that globe!
-			  globe.draw(canvas);
-			
-			  function autocenter(options) {
-				    options = options || {};
-				    var needsCentering = true;
-				    var globe = null;
-	
-				    var resize = function() {
-				      var width  = window.innerWidth + (options.extraWidth || 0);
-				      var height = window.innerHeight + (options.extraHeight || 0);
-				      globe.canvas.width = width;
-				      globe.canvas.height = height;
-				      globe.projection.translate([width / 2, height / 2]);
-				    };
-	
-				    return function(planet) {
-				      globe = planet;
-				      planet.onInit(function() {
-				        needsCentering = true;
-				        d3.select(window).on('resize', function() {
-				          needsCentering = true;
-				        });
-				      });
-	
-				      planet.onDraw(function() {
-				        if (needsCentering) { resize(); needsCentering = false; }
-				      });
-				    };
-				  };
-				  
-			  function autoscale(options) {
+		//resize test
+		
+		 
+  var width = 1000,
+  height = 900,
+  sens = 0.25,
+  focused;
+
+  //Setting projection
+
+  var projection = d3.geo.orthographic()
+  .scale(400)
+  .rotate([0, 0])
+  .translate([width / 2, height / 2])
+  .clipAngle(90);
+
+  var path = d3.geo.path()
+  .projection(projection);
+
+  //SVG container
+
+  var svg = d3.select(".globe-div").append("svg")
+  .attr("width", width)
+  .attr("height", height);
+  
+
+  //Adding water
+
+  svg.append("path")
+  .datum({type: "Sphere"})
+  .attr("class", "water")
+  .attr("d", path);
+
+  var countryTooltip = d3.select("globe-div").append("div").attr("class", "countryTooltip"),
+  countryList = d3.select("globe-div").append("select").attr("name", "countries");
+
+  queue()
+  .defer(d3.json, "${pageContext.request.contextPath}/resources/js/planet/world-110m.json")
+  .defer(d3.tsv, "${pageContext.request.contextPath}/resources/js/planet/world-110m-country-names.tsv")
+  .await(ready);
+
+  //Main function
+
+  function ready(error, world, countryData) {
+
+    var countryById = {},
+    countries = topojson.feature(world, world.objects.countries).features;
+
+    //Adding countries to select
+
+    countryData.forEach(function(d) {
+      countryById[d.id] = d.name;
+      option = countryList.append("option");
+      option.text(d.name);
+      option.property("value", d.id);
+    });
+
+    //Drawing countries on the globe
+
+    var world = svg.selectAll("path.land")
+    .data(countries)
+    .enter().append("path")
+    .attr("class", "land")
+    .attr("d", path)
+
+    //Drag event
+
+    .call(d3.behavior.drag()
+      .origin(function() { var r = projection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+      .on("drag", function() {
+        var rotate = projection.rotate();
+        projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+        svg.selectAll("path.land").attr("d", path);
+        svg.selectAll(".focused").classed("focused", focused = false);
+      }))
+
+    //Mouse events
+
+    .on("mouseover", function(d) {
+    	alert(d.id);
+      countryTooltip.text(countryById[d.id])
+      .style("left", (d3.event.pageX + 7) + "px")
+      .style("top", (d3.event.pageY - 15) + "px")
+      .style("display", "block")
+      .style("opacity", 1);
+    })
+    .on("mouseout", function(d) {
+      countryTooltip.style("opacity", 0)
+      .style("display", "none");
+    })
+    .on("mousemove", function(d) {
+      countryTooltip.style("left", (d3.event.pageX + 7) + "px")
+      .style("top", (d3.event.pageY - 15) + "px");
+    });
+
+    //Country focus on option select
+
+    d3.select("select").on("change", function() {
+      var rotate = projection.rotate(),
+      focusedCountry = country(countries, this),
+      p = d3.geo.centroid(focusedCountry);
+
+      svg.selectAll(".focused").classed("focused", focused = false);
+
+    //Globe rotating
+
+    (function transition() {
+      d3.transition()
+      .duration(1500)
+      .tween("rotate", function() {
+        var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+        return function(t) {
+          projection.rotate(r(t));
+          svg.selectAll("path").attr("d", path)
+          .classed("focused", function(d, i) { return d.id == focusedCountry.id ? focused = d : false; });
+        };
+      })
+      })();
+    });
+
+    function country(cnt, sel) { 
+      for(var i = 0, l = cnt.length; i < l; i++) {
+        if(cnt[i].id == sel.value) {return cnt[i];}
+      }
+    };
+
+  };
+  
+  //auto centering
+   function autocenter(options) {
+				options = options || {};
+				var needsCentering = true;
+				var globe = null;
+
+				var resize = function() {
+					var width = window.innerWidth + (options.extraWidth || 0);
+					var height = window.innerHeight
+							+ (options.extraHeight || 0);
+					globe.canvas.width = width;
+					globe.canvas.height = height;
+					globe.projection.translate([ width / 2, height / 2 ]);
+				};
+
+				return function(planet) {
+					globe = planet;
+					planet.onInit(function() {
+						needsCentering = true;
+						d3.select(window).on('resize', function() {
+							needsCentering = true;
+						});
+					});
+
+					planet.onDraw(function() {
+						if (needsCentering) {
+							resize();
+							needsCentering = false;
+						}
+					});
+				};
+			};
+	//auto scaling
+	function autoscale(options) {
 				  options = options || {};
 				  return function(planet) {
 					  planet.onInit(function() {
@@ -195,74 +282,9 @@
 				}
 				;
 	
-				function autorotate(degPerSec) {
-					// Planetary.js plugins are functions that take a `planet` instance
-					// as an argument...
-					return function(planet) {
-						var lastTick = null;
-						var paused = false;
-						planet.plugins.autorotate = {
-							pause : function() {
-								paused = true;
-							},
-							resume : function() {
-								paused = false;
-							}
-						};
-						// ...and configure hooks into certain pieces of its lifecycle.
-						planet.onDraw(function() {
-							if (paused || !lastTick) {
-								lastTick = new Date();
-							} else {
-								var now = new Date();
-								var delta = now - lastTick;
-								// This plugin uses the built-in projection (provided by D3)
-								// to rotate the globe each time we draw it.
-								var rotation = planet.projection.rotate();
-								rotation[0] += degPerSec * delta / 1000;
-								if (rotation[0] >= 180)
-									rotation[0] -= 360;
-								planet.projection.rotate(rotation);
-								lastTick = now;
-							}
-						});
-					};
-				}
-				;
 	
-				// This plugin takes lake data from the special
-				// TopoJSON we're loading and draws them on the map.
-				function lakes(options) {
-					options = options || {};
-					var lakes = null;
-	
-					return function(planet) {
-						planet.onInit(function() {
-							// We can access the data loaded from the TopoJSON plugin
-							// on its namespace on `planet.plugins`. We're loading a custom
-							// TopoJSON file with an object called "ne_110m_lakes".
-							var world = planet.plugins.topojson.world;
-							lakes = topojson.feature(world,
-									world.objects.ne_110m_lakes);
-						});
-	
-						planet.onDraw(function() {
-							planet.withSavedContext(function(context) {
-								context.beginPath();
-								planet.path.context(context)(lakes);
-								context.fillStyle = options.fill || 'black';
-								context.fill();
-							});
-						});
-					};
-				}
-				;
-			})();
 		</script>
-	</c:if>
-	<!-- JQUERY import -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+		
 		<!-- header control JS -->
 		<script>
 			var right_nav = 0	

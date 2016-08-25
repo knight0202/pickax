@@ -414,6 +414,7 @@
 
     return function(planet) {
       planet.onInit(function() {
+    	//d3 drag 정의
         var drag = d3.behavior.drag()
           .on('dragstart', onDragStart.bind(planet))
           .on('dragend', onDragEnd.bind(planet))
