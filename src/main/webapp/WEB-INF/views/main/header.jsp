@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
 	              <span class="icon-bar"></span>
 	            </button>
 	            <a class="navbar-brand" href="#" style="color:white;">P.KAX</a>
-	          </div>
+	          </div>	
 	          <div id="navbar" class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
 	              <li><a href="#" style="color:white;">About</a></li>
@@ -44,9 +44,7 @@ pageEncoding="UTF-8"%>
 			                  <li><a href="#">Another action</a></li>
 			                  <li><a href="#">Something else here</a></li>
 			                  <li role="separator" class="divider"></li>
-			                  <li class="dropdown-header">Nav header</li>
-			                  <li><a href="#">Separated link</a></li>
-			                  <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+			                  <li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 			                </ul>
 	              	</li>
 	              <li><a href="javascript:right_side();" style="font-size:20px; text-align:right; color:white;"><i class="fa fa-gear" id="header_edit"></i> </a></li>

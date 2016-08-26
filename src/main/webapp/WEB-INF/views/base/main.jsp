@@ -138,8 +138,8 @@
   svg.append("path")
   .datum({type: "Sphere"})
   .attr("class", "water")
-  .attr("d", path);
-
+  .attr("d", path)
+	
   var countryTooltip = d3.select("globe-div").append("div").attr("class", "countryTooltip"),
   countryList = d3.select("globe-div").append("select").attr("name", "countries");
 
@@ -186,12 +186,14 @@
     //Mouse events
 
     .on("mouseover", function(d) {
-    	alert(d.id);
       countryTooltip.text(countryById[d.id])
       .style("left", (d3.event.pageX + 7) + "px")
       .style("top", (d3.event.pageY - 15) + "px")
       .style("display", "block")
       .style("opacity", 1);
+    })
+    .on("click",function(d){
+    	alert(d.id);
     })
     .on("mouseout", function(d) {
       countryTooltip.style("opacity", 0)
@@ -201,7 +203,7 @@
       countryTooltip.style("left", (d3.event.pageX + 7) + "px")
       .style("top", (d3.event.pageY - 15) + "px");
     });
-
+  	      
     //Country focus on option select
 
     d3.select("select").on("change", function() {
@@ -229,7 +231,7 @@
 
     function country(cnt, sel) { 
       for(var i = 0, l = cnt.length; i < l; i++) {
-        if(cnt[i].id == sel.value) {return cnt[i];}
+        if(cnt[i].id == sel.value) {return cnt[i];}ja
       }
     };
 
