@@ -309,7 +309,6 @@
 					    left: "-=300",
 					    right: "+=300"
 					  }, 400, function() {
-						  $("#header_edit").attr("class","fa fa-gear fa-spin");
 					  });
 					right_nav += 1;
 				}else{
@@ -328,7 +327,6 @@
 					    left: "+=300",
 					    right: "-=300"
 					  }, 400, function() {
-						  $("#header_edit").attr("class","fa fa-gear");
 						  $("#right_nav_div").css("width","");
 					  });
 					right_nav -= 1;
