@@ -165,7 +165,7 @@
 							<!-- Button -->
 
 							<div class="col-sm-12 controls">
-								<a id="btn-login" href="javascript:$('form').submit();" class="btn btn-success">로그인 </a> <a
+								<a id="btn-login" href="javascript:$('form').submit();" onkeydown="javascript:if (event.keyCode == 13) { $('form').submit(); }" class="btn btn-success">로그인 </a> <a
 									id="btn-fblogin" href="#" class="btn btn-primary">페이스북 계정으로 로그인</a>
 
 							</div>

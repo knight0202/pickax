@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
 	              <span class="icon-bar"></span>
 	            </button>
 	            <a class="navbar-brand" href="#" style="color:white;">P.KAX</a>
-	          </div>
+	          </div>	
 	          <div id="navbar" class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
 	              <li><a href="#" style="color:white;">About</a></li>
@@ -38,18 +38,16 @@ pageEncoding="UTF-8"%>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
 	            	<li class="dropdown">
-	                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">사용자 님 <span class="caret"></span></a>
+	                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">toggle <span class="caret"></span></a>
 	                		<ul class="dropdown-menu">
 			                  <li><a href="#">Action</a></li>
 			                  <li><a href="#">Another action</a></li>
 			                  <li><a href="#">Something else here</a></li>
 			                  <li role="separator" class="divider"></li>
-			                  <li class="dropdown-header">Nav header</li>
-			                  <li><a href="#">Separated link</a></li>
-			                  <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+			                  <li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 			                </ul>
 	              	</li>
-	              <li><a href="javascript:right_side();" style="font-size:20px; text-align:right; color:white;"><i class="fa fa-gear" id="header_edit"></i> </a></li>
+	              <li><a href="javascript:right_side();" style="text-align:right; color:white; padding-right:30px;"><i class="fa fa-user" id="header_edit"></i> &nbsp;<span style="font-size:15px;">사용자 님</span></a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
 	        </div>
