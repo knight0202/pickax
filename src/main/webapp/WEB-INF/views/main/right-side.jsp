@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
 						<img src="${pageContext.request.contextPath}/resources/img/profile/default.jpg" class="img-circle" style="width:120px; border: 5px solid rgba(100,100,100,0.8);"/>
 						<br>
 						<div class="col-lg-12 padding-10">
-							<h3>사용자 님</h3>
+							<h3><c:out value="${name}"/> 님</h3>
 						</div>
 						<br>
 					</div>

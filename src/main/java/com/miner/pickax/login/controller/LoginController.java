@@ -3,6 +3,7 @@ package com.miner.pickax.login.controller;
 import java.io.File;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +34,8 @@ import com.miner.pickax.common.util.CommonUtil;
 import com.miner.pickax.login.mapper.MemberMapper;
 import com.miner.pickax.login.vo.TermVo;
 import com.miner.pickax.login.vo.UserVo;
+import com.miner.pickax.main.mapper.CountryMapper;
+import com.miner.pickax.main.vo.CountryInfoVo;
 
 @Controller
 public class LoginController {
@@ -39,15 +43,19 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired private MemberMapper memberMapper;
+	@Autowired private CountryMapper countryMapper;
 	
 	//메인 소개페이지 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model,
-			Principal principal) {
+			Principal principal, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		model.addAttribute("pageInfo","index");
 		
 		if(principal != null){
+			HttpSession session= request.getSession();
+			ArrayList<CountryInfoVo> countryList = countryMapper.getCountryList();
+	        session.setAttribute("countryList",countryList);
 			return new ModelAndView("main/index");
 		}else{
 			return new ModelAndView("login/index");

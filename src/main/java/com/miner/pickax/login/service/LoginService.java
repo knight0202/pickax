@@ -17,11 +17,9 @@ import com.miner.pickax.login.vo.UserVo;
 
 public class LoginService implements UserDetailsService {
 	@Autowired MemberMapper memberMapper;
-	
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-	
 		
 		UserVo userVo = new UserVo();
 		
@@ -37,6 +35,7 @@ public class LoginService implements UserDetailsService {
 		role.add(new SimpleGrantedAuthority(auth));
 		
 		UserDetails user = new User(username,pwd,role);
+		
 		return user;
 	}
 }

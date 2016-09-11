@@ -137,7 +137,7 @@
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="email" class="form-control" name="j_username" value=""
+								type="email" class="form-control" name="j_username" value="" onkeydown="javascript:if (event.keyCode == 13) { $('form').submit(); }"
 								placeholder="아이디">
 						</div>
 
@@ -145,7 +145,7 @@
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
 								type="password" class="form-control" name="j_password"
-								placeholder="비밀번호">
+								placeholder="비밀번호" onkeydown = "javascript:if (event.keyCode == 13) { $('form').submit(); }">
 						</div>
 						<c:if test="${info_message != null}">
 							<div class="col-lg-12">

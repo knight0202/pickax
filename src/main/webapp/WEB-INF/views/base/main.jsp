@@ -79,6 +79,11 @@
 		background-color: rgba(10,10,10,0.6);
 		cursor:pointer;
 	}
+	#footer-wrapper{
+		margin:0;
+		width:100%;
+		padding:0;
+	}
 </style>
 
 <title><tiles:getAsString name="title"/></title>
@@ -86,7 +91,6 @@
 <body>
 		<div id="content" class="col-lg-12">
 			<tiles:insertAttribute name="header"/>
-			<tiles:insertAttribute name="left-side"/>
 			<div id="main_div" class="col-lg-12">
 				<tiles:insertAttribute name="body"/>
 			</div>
@@ -94,11 +98,11 @@
 		<div id="right_nav_div">
 			<tiles:insertAttribute name="right-side"/>		
 		</div>
-		<footer class="footer">
-	      <div class="container">
+		<div class="footer">
+	      <div id="footer-wrapper" class="container">
 	        <tiles:insertAttribute name="footer"/>
 	      </div>
-	    </footer>
+	    </div>
 	    <div id="left_block" style="display: none;" onclick="right_side()"></div>
 </body>	
 	<!-- JS import 영역 -->
@@ -109,7 +113,8 @@
 		<script>
 		//resize test
 		
-		 
+	var countrySelected = 0;
+	var countryInfoObject;
   var width = 1000,
   height = 900,
   sens = 0.25,
@@ -193,7 +198,24 @@
       .style("opacity", 1);
     })
     .on("click",function(d){
-    	alert(d.id);
+    	var id = d.id;
+    	
+    	var country;
+		//선택된 나라 저장
+		for(var i = 0; i < list.length; i++){
+			if(id == list[i][0]){
+				country = list[i];
+				break;
+			}
+		}
+		$(".detFlag img").eq(0).attr("src","${pageContext.request.contextPath}/resources/img/flags-normal/" + country[4].toLowerCase() + ".png");
+		$("#footer-content").slideUp("slow",function(){
+    		fn_countryClicked(id);
+    	});
+		$("#header-content").slideUp("slow");
+    	countryInfoObject = d;
+    	$("#btn_confirm").attr("onclick","fn_countrySelected()");
+    	$("#selectConfirmModal").modal();
     })
     .on("mouseout", function(d) {
       countryTooltip.style("opacity", 0)
@@ -231,7 +253,7 @@
 
     function country(cnt, sel) { 
       for(var i = 0, l = cnt.length; i < l; i++) {
-        if(cnt[i].id == sel.value) {return cnt[i];}ja
+        if(cnt[i].id == sel.value) {return cnt[i];}
       }
     };
 
@@ -283,8 +305,6 @@
 					};
 				}
 				;
-	
-	
 		</script>
 		
 		<!-- header control JS -->
@@ -331,6 +351,17 @@
 					  });
 					right_nav -= 1;
 				}
+			}
+			function fn_close(){
+				$(".modal-text").text("");
+		    	$("#footer-content").slideUp("slow");
+		    	if(countrySelected == 1){
+		    		$("#header-content").slideUp("slow",function(){
+			    		$("#content .container").fadeToggle();
+			    		svg.selectAll(".focused").classed("focused", focused = false);
+			    		countrySelected = 0;
+			    	});	
+		    	}
 			}
 		</script>
 		<script>
