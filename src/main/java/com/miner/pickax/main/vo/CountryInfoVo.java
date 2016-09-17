@@ -18,8 +18,23 @@ public class CountryInfoVo {
 	private String capitalEn;
 	private String capitalKr;
 	private String currency;
-	private int E164;
+	private String e164;
+	private String area_km2;
+	private String timeZoneInCapitalEn;
 	
+	
+	public String getTimeZoneInCapitalEn() {
+		return timeZoneInCapitalEn;
+	}
+	public void setTimeZoneInCapitalEn(String timeZoneInCapitalEn) {
+		this.timeZoneInCapitalEn = timeZoneInCapitalEn;
+	}
+	public String getArea_km2() {
+		return area_km2;
+	}
+	public void setArea_km2(String area_km2) {
+		this.area_km2 = area_km2;
+	}
 	public int getId() {
 		return id;
 	}
@@ -57,7 +72,28 @@ public class CountryInfoVo {
 		this.iso3 = iso3;
 	}
 	public String getContinent() {
-		return continent;
+		if(continent != null){
+			if(continent.equals("Africa")){
+				return "아프리카 ( Africa )";
+			}else if(continent.equals("Asia")){
+				return "아시아 ( Asia )";
+			}else if(continent.equals("Antarctica")){
+				return "남극대륙 ( Antarctica )";
+			}else if(continent.equals("Europe")){
+				return "유럽 ( Europe )";
+			}else if(continent.equals("North America")){
+				return "북아메리카 ( North America )";
+			}else if(continent.equals("Oceania")){
+				return "오세아니아 ( Oceania )";
+			}else if(continent.equals("South America")){
+				return "남아메리카 ( South America )";
+			}else{
+				return continent;
+			}
+		}
+		else{
+			return continent;
+		}
 	}
 	public void setContinent(String continent) {
 		this.continent = continent;
@@ -80,11 +116,11 @@ public class CountryInfoVo {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public int getE164() {
-		return E164;
+	public String getE164() {
+		return e164;
 	}
-	public void setE164(int e164) {
-		E164 = e164;
+	public void setE164(String e164) {
+		this.e164 = e164;
 	}
 	
 	

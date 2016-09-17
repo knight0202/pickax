@@ -362,6 +362,7 @@
 			    		countrySelected = 0;
 			    	});	
 		    	}
+		    	$("#header-content show-text").text("");
 			}
 		</script>
 		<script>
@@ -369,7 +370,7 @@
 				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
 			}
 		</script>
-
+		
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script>
 			if (!window.jQuery.ui) {
@@ -378,4 +379,7 @@
 		</script>
 	<!-- bootstrap import -->
 	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+	<!-- moment js import -->
+	<script src="${pageContext.request.contextPath}/resources/js/plugin/moment/moment-with-locales.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/plugin/moment/moment-timezone.js"></script>
 </html>
